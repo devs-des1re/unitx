@@ -1,8 +1,11 @@
+"""Testing Library"""
 import pytest
 from unitx import Distance, Mass, convert_mass
 from unitx import InvalidUnitError, NonNumericError, UnsupportedUnitError
 
 def test_conversion():
+    """Tests the conversion so its converting right."""
+
     converted = convert_mass(10, Mass.KILOGRAM, Mass.GRAM) # Metric Conversion
     assert converted == 10000
 
@@ -13,6 +16,8 @@ def test_conversion():
     assert round(converted, 8) == 1574.73044418
 
 def test_errors():
+    """Tests the conversion errors so its been handled properly."""
+
     # Value is non numeric
     with pytest.raises(NonNumericError):
         convert_mass("string", Mass.OUNCE, Mass.POUND)

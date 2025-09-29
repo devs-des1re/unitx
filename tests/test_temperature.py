@@ -1,8 +1,11 @@
+"""Testing Library"""
 import pytest
 from unitx import Distance, Temperature, convert_temperature
 from unitx import InvalidUnitError, NonNumericError, UnsupportedUnitError
 
 def test_conversion():
+    """Tests the conversion so its converting right."""
+
     converted = convert_temperature(10, Temperature.CELSIUS, Temperature.KELVIN) # Metric Conversion
     assert converted == 283.15
 
@@ -19,6 +22,8 @@ def test_conversion():
     assert round(converted, 5) == -449.67
 
 def test_errors():
+    """Tests the conversion errors so its been handled properly."""
+
     # Value is non numeric
     with pytest.raises(NonNumericError):
         convert_temperature("string", Temperature.CELSIUS, Temperature.FAHRENHEIT)
