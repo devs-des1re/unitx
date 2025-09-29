@@ -1,0 +1,51 @@
+from enum import Enum
+from .exceptions import UnsupportedUnitError, InvalidUnitError, NonNumericError
+
+class Area(Enum):
+    SQUARE_METER = 1.0
+    SQUARE_KILOMETER = 1_000_000.0
+    SQUARE_CENTIMETER = 0.0001
+    SQUARE_MILLIMETER = 0.000001
+    HECTARE = 10_000.0
+    ACRE = 4046.86
+    SQUARE_FOOT = 0.092903
+    SQUARE_YARD = 0.836127
+    SQUARE_MILE = 2_589_988.0
+
+def convert_area(value: float, from_unit: Area, to_unit: Area)  -> float:
+    """Convert a area value from a unit to another unit.
+
+    Args:
+        value (float): The numeric value to convert.
+        from_unit (Area): The unit you are converting from.
+        to_unit (Area): The unit you are converting to.
+
+    Raises:
+        NonNumericError: Raised when value is not int or float.
+        UnsupportedUnitError: Raised when a unit is not recognized.
+        InvalidUnitError: Raised when units are from a different category.
+
+    Returns:
+        float: The converted numeric value
+    """
+
+    # Check if value is numeric
+    if not isinstance(value, (int, float)):
+        raise NonNumericError(f"Value must be numeric, got {type(value).__name__}")
+    
+    # Check if units are valid Enum members
+    if not isinstance(from_unit, Enum):
+        raise UnsupportedUnitError(f"From unit must be enum, got {type(from_unit).__name__}")
+    
+    if not isinstance(to_unit, Enum):
+        raise UnsupportedUnitError(f"From unit must be enum, got {type(to_unit).__name__}")
+    
+    # Check if category mismatch
+    if from_unit.__class__ is not to_unit.__class__:
+        raise InvalidUnitError(f"From unit and to unit must be from the category, got {type(from_unit).__name__}, {type(from_unit).__name__}")
+    
+    # Check if from unit is from Area Enum
+    if not isinstance(from_unit, Area):
+        raise InvalidUnitError(f"From unit must be from the Area enum, got {type(from_unit).__name__}")
+    
+    return value * from_unit.value / to_unit.value
