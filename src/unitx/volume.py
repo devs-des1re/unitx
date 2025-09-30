@@ -1,7 +1,13 @@
+"""Converts units of volume"""
 from enum import Enum
-from .exceptions import UnsupportedUnitError, InvalidUnitError, NonNumericError
+from .validate import _validate_conversion
 
 class Volume(Enum):
+    """Class for which contains Volume Enums.
+
+    Args:
+        Enum (float): The Volume Enum.
+    """
     LITER = 1.0
     MILLILITER = 0.001
     CUBIC_METER = 1000.0
@@ -31,23 +37,6 @@ def convert_volume(value: float, from_unit: Volume, to_unit: Volume)  -> float:
         float: The converted numeric value
     """
 
-    # Check if value is numeric
-    if not isinstance(value, (int, float)):
-        raise NonNumericError(f"Value must be numeric, got {type(value).__name__}")
-    
-    # Check if units are valid Enum members
-    if not isinstance(from_unit, Enum):
-        raise UnsupportedUnitError(f"From unit must be enum, got {type(from_unit).__name__}")
-    
-    if not isinstance(to_unit, Enum):
-        raise UnsupportedUnitError(f"From unit must be enum, got {type(to_unit).__name__}")
-    
-    # Check if category mismatch
-    if from_unit.__class__ is not to_unit.__class__:
-        raise InvalidUnitError(f"From unit and to unit must be from the category, got {type(from_unit).__name__}, {type(from_unit).__name__}")
-    
-    # Check if from unit is from Volume Enum
-    if not isinstance(from_unit, Volume):
-        raise InvalidUnitError(f"From unit must be from the Volume enum, got {type(from_unit).__name__}")
-    
+    _validate_conversion(value, from_unit, to_unit, Volume)
+
     return value * from_unit.value / to_unit.value

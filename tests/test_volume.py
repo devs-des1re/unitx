@@ -1,8 +1,11 @@
+"""Testing Library"""
 import pytest
 from unitx import Distance, Volume, convert_volume
 from unitx import InvalidUnitError, NonNumericError, UnsupportedUnitError
 
 def test_conversion():
+    """Tests the conversion so its converting right."""
+
     converted = convert_volume(10, Volume.LITER, Volume.MILLILITER) # Metric Conversion
     assert converted == 10000
 
@@ -13,6 +16,8 @@ def test_conversion():
     assert converted == 21133.78531455526
 
 def test_errors():
+    """Tests the conversion errors so its been handled properly."""
+
     # Value is non numeric
     with pytest.raises(NonNumericError):
         convert_volume("string", Volume.GALLON_US, Volume.MILLILITER)

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools==80.9.0"]
+requires = ["setuptools>=75.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,8 +10,8 @@ version = "0.0.1"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 
-authors = [{name="devs_des1re", email="arjunbrij8811@gmail.com"}]
-maintainers = [{name="devs_des1re", email="arjunbrij8811@gmail.com"}]
+authors = [ { name="devs_des1re", email="arjunbrij8811@gmail.com" } ]
+maintainers = [ { name="devs_des1re", email="arjunbrij8811@gmail.com" } ]
 
 keywords = [
     "app",
@@ -34,4 +34,4 @@ classifiers = [
     "Topic :: Software Development",
     "Topic :: Utilities",
 ]
-dependencies = ["pip >= 21.2"]
+dependencies = []
