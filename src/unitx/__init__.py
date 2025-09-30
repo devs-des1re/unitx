@@ -22,7 +22,7 @@ __all__ = [
     "UnsupportedUnitError"
 ]
 
-__version__ = "0.0.2"
+__version__ = "0.1.0"
 __author__ = "devs_des1re"
 __license__ = "MIT"
 __email__ = "arjunbrij8811@gmail.com"
