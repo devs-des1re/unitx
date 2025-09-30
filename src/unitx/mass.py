@@ -1,6 +1,6 @@
 """Converts units of mass"""
 from enum import Enum
-from .exceptions import UnsupportedUnitError, InvalidUnitError, NonNumericError
+from .validate import _validate_conversion
 
 class Mass(Enum):
     """Class for which contains Mass Enums.
@@ -34,23 +34,6 @@ def convert_mass(value: float, from_unit: Mass, to_unit: Mass)  -> float:
         float: The converted numeric value
     """
 
-    # Check if value is numeric
-    if not isinstance(value, (int, float)):
-        raise NonNumericError(f"Value must be numeric, got {type(value).__name__}")
-
-    # Check if units are valid Enum members
-    if not isinstance(from_unit, Enum):
-        raise UnsupportedUnitError(f"From unit must be enum, got {type(from_unit).__name__}")
-
-    if not isinstance(to_unit, Enum):
-        raise UnsupportedUnitError(f"From unit must be enum, got {type(to_unit).__name__}")
-
-    # Check if category mismatch
-    if from_unit.__class__ is not to_unit.__class__:
-        raise InvalidUnitError(f"From unit and to unit must be from the category, got {type(from_unit).__name__}, {type(from_unit).__name__}")
-
-    # Check if from unit is from Mass Enum
-    if not isinstance(from_unit, Mass):
-        raise InvalidUnitError(f"From unit must be from the Mass enum, got {type(from_unit).__name__}")
+    _validate_conversion(value, from_unit, to_unit, Mass)
 
     return value * from_unit.value / to_unit.value
