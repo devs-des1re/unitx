@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "unitx"
 description = "A Python library which dynamically converts different types of units"
 readme = "README.md"
-version = "0.1.0"
+version = "0.1.1"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 
@@ -39,4 +39,4 @@ dependencies = []
 [project.urls]
 Homepage = "https://github.com/devs-des1re/unitx"
 Issues = "https://github.com/devs-des1re/unitx/issues"
-Docs = "https://unitx.readthedocs.io/en/stable"
+Documentation = "https://unitx.readthedocs.io/en/stable"
