@@ -20,8 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest
+          pip install -r requirements.txt || true  # ignore if not present
+
+      - name: Install project
+        run: pip install -e .
 
       - name: Run tests
         run: pytest
